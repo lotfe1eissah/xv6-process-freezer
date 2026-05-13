@@ -195,7 +195,9 @@ UPROGS=\
 	$U/_logstress\
 	$U/_forphan\
 	$U/_dorphan\
-
+	$U/_comchannel\
+	$U/_task510\
+	$U/_task610\
 
 
 
