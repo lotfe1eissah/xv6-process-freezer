@@ -123,6 +123,7 @@ allocproc(void)
 
 found:
   p->pid = allocpid();
+  p->frozen = 0;
   p->state = USED;
 
   // Allocate a trapframe page.
@@ -437,6 +438,10 @@ scheduler(void)
     int found = 0;
     for(p = proc; p < &proc[NPROC]; p++) {
       acquire(&p->lock);
+      if(p->frozen){
+  	release(&p->lock);
+ 	 continue;
+    	}
       if(p->state == RUNNABLE) {
         // Switch to chosen process.  It is the process's job
         // to release its lock and then reacquire it
