@@ -198,7 +198,7 @@ UPROGS=\
 	$U/_comchannel\
 	$U/_task510\
 	$U/_task610\
-
+	$U/_freezertest\
 
 
 ifeq ($(LAB),syscall)
