@@ -78,6 +78,8 @@ void            panic(char*) __attribute__((noreturn));
 void            printfinit(void);
 
 // proc.c
+int             freezeproc(int);
+int             unfreezeproc(int);
 int             cpuid(void);
 void            kexit(int);
 int             kfork(void);

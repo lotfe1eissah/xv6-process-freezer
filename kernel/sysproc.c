@@ -105,3 +105,19 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64
+sys_freeze(void)
+{
+  int pid;
+  argint(0, &pid);
+  return freezeproc(pid);
+}
+
+uint64
+sys_unfreeze(void)
+{
+  int pid;
+  argint(0, &pid);
+  return unfreezeproc(pid);
+}

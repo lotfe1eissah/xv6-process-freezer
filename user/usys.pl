@@ -20,7 +20,9 @@ sub entry {
     print " ecall\n";
     print " ret\n";
 }
-	
+
+entry("freeze");
+entry("unfreeze");	
 entry("fork");
 entry("exit");
 entry("wait");

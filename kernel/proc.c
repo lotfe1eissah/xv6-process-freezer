@@ -690,3 +690,60 @@ procdump(void)
     printf("\n");
   }
 }
+
+
+int
+freezeproc(int pid)
+{
+  if(pid <= 1)
+    return -1;
+
+  struct proc *p;
+
+  for(p = proc; p < &proc[NPROC]; p++){
+    acquire(&p->lock);
+
+    if(p->pid == pid){
+      if(p->state == UNUSED || p->state == ZOMBIE || p->frozen){
+        release(&p->lock);
+        return -1;
+      }
+
+      p->frozen = 1;
+      release(&p->lock);
+      return 0;
+    }
+
+    release(&p->lock);
+  }
+
+  return -1;
+}
+
+int
+unfreezeproc(int pid)
+{
+  if(pid <= 1)
+    return -1;
+
+  struct proc *p;
+
+  for(p = proc; p < &proc[NPROC]; p++){
+    acquire(&p->lock);
+
+    if(p->pid == pid){
+      if(p->state == UNUSED || p->state == ZOMBIE || !p->frozen){
+        release(&p->lock);
+        return -1;
+      }
+
+      p->frozen = 0;
+      release(&p->lock);
+      return 0;
+    }
+
+    release(&p->lock);
+  }
+
+  return -1;
+}
