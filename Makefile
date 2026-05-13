@@ -199,7 +199,8 @@ UPROGS=\
 	$U/_task510\
 	$U/_task610\
 	$U/_freezertest\
-
+	$U/_frzerrtest\
+	$U/_frzmultitest\
 
 ifeq ($(LAB),syscall)
 UPROGS += \
